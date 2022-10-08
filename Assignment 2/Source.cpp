@@ -1,11 +1,8 @@
 #include <iostream>
 #include <set>
-using namespace std;
-
-
-int sumDigits(int i);
-int root5(int i);
-void ramanujan();
+#include <string>
+#include <functional>
+#include <queue>
 
 int sumDigits(int i) {
 	if (i == 0)
@@ -15,56 +12,55 @@ int sumDigits(int i) {
 	return (i % 10 + sumDigits(i / 10));
 }
 
-class question_3
-{
-public:
-	int a = 1;
-	int d = 0;
-	set<int, greater<int>> deviSet, divSet, aSet, bSet;
-	int doubleInt(int dividend, int devisor);
-	int halfInt(int dividend, int devisor);
-	int egyptDivision(int dividend, int devisor);
 
-private:
-
-};
-
-
-int question_3::doubleInt(int dividend, int devisor) 
-{ 
-	if (devisor <= dividend)
-	{
-		cout << a <<"\t" << devisor << "\t" << dividend << "\n";
-		a += a;
-		deviSet.insert(devisor);
-		aSet.insert(a);
-		divSet.insert(dividend);
-		return (doubleInt(dividend, devisor += devisor));
-
-	}
-	cout << a << "\t" << devisor << "\t" << dividend << "\n";
-	return (dividend, devisor, a);
+int doubleInt(int i) {
+	return (doubleInt(i += i));
 }
 
-int question_3::halfInt(int dividend, int devisor) {
-	if (devisor >= dividend)
+int halveInt(int half, int i) {
+	if (i <= 1)
 	{
-		cout << a << "\t" << devisor << "\t" << dividend << "\t" << d << "\n";
-		
-		return (halfInt(dividend, devisor -= devisor));
+		return 0;
 	}
-	else if (dividend || devisor || a == 1)
+	else if ((half + half) <= i)
 	{
-		return (dividend, devisor);
+		return half;
 	}
-	cout << a << "\t" << devisor << "\t" << dividend << "\t" << d << "\n";
-	return (halfInt(dividend -= devisor, devisor -= devisor));
+	else
+	{
+		return (halveInt(half - 1, i));
+	}
+}
+
+int egyptDivision(int dividend, int devisor)
+{
+	int a = 1;
+	int b = devisor;
+	int c = dividend;
+	int d = 0;
+
+	while (b < c)
+	{
+		a = doubleInt(a);
+		b = doubleInt(b);
+	}
+
+	while (a >= 1 || c >=1)
+	{
+		if (b <= c)
+		{
+			d += a;
+			c -= b;
+		}
+		a = halveInt(a, a);
+		b = halveInt(b, b);
+	}
+	return d;
 }
 
 
 int main() {
 	//cout << sumDigits(1234);
-	question_3 egyptDivision;
-	egyptDivision.doubleInt(1960, 56);
+	std::cout << egyptDivision(1960, 56) << std::endl;
 	return 0;
 }
