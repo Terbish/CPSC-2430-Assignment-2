@@ -26,11 +26,7 @@ int root5(int i) {
 }
 
 int doubleInt(int i) {
-	if (i == 0)
-	{
-		return i;
-	}
-	return (doubleInt(i += i));
+	return (i+i);
 }
 
 int halveInt(int half, int i) {
@@ -87,8 +83,8 @@ int egyptDivision(int dividend, int devisor)
 
 int main() {
 	//std::cout << sumDigits(1234);
-	/*std::cout << egyptDivision(1960, 56) << std::endl;*/
+	std::cout << egyptDivision(1960, 56) << std::endl;
 	/*std::cout << root5(250);*/
-	std::cout << ramanujan(0);
+	//std::cout << ramanujan(0);
 	return 0;
 }
