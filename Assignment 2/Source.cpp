@@ -1,8 +1,14 @@
 #include <iostream>
-#include <set>
-#include <string>
 #include <functional>
-#include <queue>
+
+/* Question 1
+	T(n) = 11n^3 + logn + 12sqrt(n)
+	logn + 12sqrt(n) <= 13n if n >= 1
+	11n^3 + logn + 12sqrt(n) <= 24n^3 if n >= 1
+	therefore C = 24 f(n) = n^3
+	so C = 24 and N = 1
+	O(N) = n^3
+	*/
 
 int sumDigits(int i) {
 	if (i == 0)
@@ -12,17 +18,20 @@ int sumDigits(int i) {
 	return (i % 10 + sumDigits(i / 10));
 }
 
-int root5(int i) {
-	if (i == 0 || i == 1)
-	{
-		return i;
-	}
-	int fin = 0;
+double function(double y, int n) {
+	return std::pow(y, 5) - n;
+}
+double functionP(double y) {
+	return 5 * pow(y, 4);
+}
 
-	while (fin * fin * fin * fin * fin <= i) {
-		fin++;
+double root5(double y, int n) {
+	if (std::abs(function(y, n)) < 0.00001)
+	{
+		return y;
 	}
-	return fin - 1;
+	double newY = y - function(y, n) / functionP(y);
+	return root5(newY, n);
 }
 
 int doubleInt(int i) {
@@ -70,21 +79,21 @@ int egyptDivision(int dividend, int devisor)
 	return d;
 }
 
-//int ramanujan(int depth) {
-//	if (depth == 0)
-//	{
-//		return std::sqrt(6);
-//	}
-//	// if depth = n, sqrt(6 + n+1 sqrt(6+1+ n
-//	return (ramanujan())
-//	
-//}
+long long base = 0;
+long long ramanujan(long long depth) {
+	if (depth == -1)
+	{
+		return base;
+	}
+	base = (depth + 1) * std::sqrt((depth + 6) + base);
+	return ramanujan(depth - 1);
+}
 
 
 int main() {
 	//std::cout << sumDigits(1234);
-	std::cout << egyptDivision(1960, 56) << std::endl;
-	/*std::cout << root5(250);*/
-	//std::cout << ramanujan(0);
+	std::cout << "The Egyptian division of 1960 and 56 is: " << egyptDivision(89, 4) << std::endl;
+	//std::cout << root5(250, 5);
+	std::cout << ramanujan(10000);
 	return 0;
 }
