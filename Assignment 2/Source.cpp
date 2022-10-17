@@ -1,5 +1,5 @@
 #include <iostream>
-#include <functional>
+#include <cmath>
 
 /* Question 1
 	T(n) = 11n^3 + logn + 12sqrt(n)
@@ -76,8 +76,8 @@ int egyptDivision(int dividend, int devisor)
 	return d;
 }
 
-long long base = 0;
-long long ramanujan(long long depth) {
+double base = 0;
+double ramanujan(double depth) {
 	if (depth == -1)
 	{
 		return base;
@@ -89,8 +89,8 @@ long long ramanujan(long long depth) {
 
 int main() {
 	//std::cout << sumDigits(1234);
-	std::cout << "The Egyptian division of 1960 and 56 is: " << egyptDivision(89, 4) << std::endl;
+	// std::cout << "The Egyptian division of 1960 and 56 is: " << egyptDivision(89, 4) << std::endl;
 	//std::cout << root5(250, 5);
-	std::cout << ramanujan(10000);
+	std::cout << ramanujan(1000);
 	return 0;
 }
