@@ -21,16 +21,13 @@ int sumDigits(int i) {
 double function(double y, int n) {
 	return std::pow(y, 5) - n;
 }
-double functionP(double y) {
-	return 5 * pow(y, 4);
-}
 
 double root5(double y, int n) {
 	if (std::abs(function(y, n)) < 0.00001)
 	{
 		return y;
 	}
-	double newY = y - function(y, n) / functionP(y);
+	double newY = (((4*y) + (n/std::pow(y,4)))/5);
 	return root5(newY, n);
 }
 
